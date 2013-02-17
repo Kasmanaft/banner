@@ -1,0 +1,27 @@
+-content_for :title do 
+  'All campaigns
+.well
+  table.table.table-striped
+    caption All campaigns
+    thead
+      tr 
+        td Name
+        td Banner shows
+        td Remaining banner shows
+        td Banner clicks
+        td
+    tbody
+      -@campaigns.each do |campaign|
+        tr
+          td =campaign.name
+          td =campaign.images.sum(:show)
+          td =campaign.images.sum(:max_show) - campaign.images.sum(:show)
+          td =campaign.images.sum(:click)
+          td
+            =link_to 'Show', campaign_path(campaign), :class=>"btn"
+            =link_to 'Edit', edit_campaign_path(campaign), :class=>"btn btn-primary"
+            =link_to 'Delete', campaign_path(campaign), :method=>:delete, :class=>"btn btn-danger", :confirm=>'Are you sure?'
+
+
+
+  = link_to 'Add one more campaign', new_campaign_path, :class=>'btn btn-success btn-large btn-block'

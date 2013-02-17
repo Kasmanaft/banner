@@ -1,0 +1,15 @@
+=form_for @campaign do |f|
+  -if @campaign.errors.any?
+    .alert.alert-error
+      a.close data-dismiss="alert" href="#" &times;
+      =@campaign.errors.full_messages.join ', '
+
+  .input-prepend
+    .add-on
+      i.icon-briefcase
+    = f.text_field :name, :class=>'input-xlarge', :placeholder=>'Campaign name'
+  br
+  = f.submit "Save", :class=>"btn btn-warning"
+  -unless @campaign.new_record?
+    =link_to 'Cancel', campaign_path(@campaign), :class=>"btn"
+  =link_to 'Back to list', campaigns_path, :class=>"btn btn-success"

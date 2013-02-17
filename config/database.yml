@@ -1,0 +1,24 @@
+base: &base
+  adapter: mysql2
+  pool: 10
+  encoding: utf8
+  collation: utf8_general_ci
+  reconnect: true
+  username: root
+  password: 
+  socket:  /tmp/mysql.sock
+
+development: &development
+  <<: *base
+  database: banner_development
+
+test: &test
+  <<: *base
+  database: banner_test
+
+production:
+  <<: *base
+  database: banner
+  
+cucumber:
+  <<: *test

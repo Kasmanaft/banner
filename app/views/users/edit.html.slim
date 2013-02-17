@@ -1,0 +1,17 @@
+.well.span4.offset4
+  legend Change your password
+  -if @user.errors.any?
+    .alert.alert-error
+      a.close data-dismiss="alert" href="#" &times;
+      = @user.errors.full_messages.join ', '
+
+  =form_for @user, :html => { :method => :put } do |f|
+    .input-prepend
+      .add-on
+        i.icon-key
+      = f.password_field :password, :class=>'input-xlarge', :placeholder=>'New Password'
+    .input-prepend
+      .add-on
+        i.icon-key
+      = f.password_field :password_confirmation, :class=>'input-xlarge', :placeholder=>'Password Confirmation'
+    = f.submit "Change my password", :class=>"btn btn-large btn-warning icon-user"

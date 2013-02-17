@@ -1,0 +1,17 @@
+.span5.offset3.well
+  legend Forgot your password?
+  = bootstrap_flash
+  -if resource.errors.any?
+    .alert.alert-error
+      a.close data-dismiss="alert" href="#" &times;
+      = resource.errors.full_messages.join ', '
+
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    .input-prepend
+      .add-on
+        i.icon-envelope
+      = f.email_field :email, :autofocus => true, :class=>:span4, :placeholder=>'Email address'
+
+    = f.submit "Send me reset password instructions", :class=>"btn btn-large btn-warning"
+
+    = render "devise/shared/links"

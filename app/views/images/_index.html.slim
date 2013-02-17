@@ -1,0 +1,21 @@
+.well
+  table.table.table-striped
+    caption Banners for this campaign
+    thead
+      tr 
+        td 
+        td link
+        td Banner shows
+        td Banner clicks
+        td Maximum shows
+    tbody
+      -@campaign.images.each do |image|
+        tr
+          td =image_tag image.file.small.url
+          td =link_to image.link, image.link
+          td =image.show.to_i.to_s
+          td =image.click.to_i.to_s
+          td =image.max_show.to_i.to_s
+          td
+            =link_to 'Edit banner', edit_campaign_image_path(@campaign,image), :class=>"btn btn-primary"
+            =link_to 'Delete banner', campaign_image_path(@campaign,image), :method=>:delete, :class=>"btn btn-danger", :confirm=>'Are you sure?'

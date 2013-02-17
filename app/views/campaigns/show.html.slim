@@ -1,0 +1,28 @@
+-content_for :title do 
+  'Campaign:
+  =@campaign.name
+.well.well-small
+  dl.dl-horizontal
+    dt Name
+    dd =@campaign.name
+
+    dt Banner shows
+    dd =@campaign.images.sum(:show)
+
+    dt Banner clicks
+    dd =@campaign.images.sum(:click)
+
+    dt Remaining shows
+    dd =@campaign.images.sum(:max_show) - @campaign.images.sum(:show)
+
+    dt
+    dd
+      br
+      =link_to 'Back to list', campaigns_path, :class=>"btn"
+      =link_to 'Code for campaign', "#", :id=>'campaign_code', :class=>"btn btn-warning", :'data-content'=>"<script language='JavaScript' type='text/javascript'>document.write(\"<script language='JavaScript' type='text/javascript' src='#{request.protocol + request.host_with_port}/bs/#{@campaign.id}?rnd=\" + Math.round(Math.random() * 1000000000) + \"'><\\/script>\");</script>", :title=>'Copy this code and paste into your page'
+      =link_to 'Add new banner', new_campaign_image_path(@campaign), :class=>"btn btn-success"
+      =link_to "Edit #{@campaign.name}", edit_campaign_path(@campaign), :class=>"btn btn-primary"
+      =link_to "Delete #{@campaign.name}", campaign_path(@campaign), :method=>:delete, :class=>"btn btn-danger", :confirm=>'Are you sure?'
+
+-if @campaign.images.size>0
+  ==render 'images/index'

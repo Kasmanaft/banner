@@ -1,0 +1,19 @@
+.span4.offset4.well
+  legend Please Sign In
+  = bootstrap_flash
+
+  =form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .input-prepend
+      .add-on
+        i.icon-envelope
+      = f.email_field :email, :autofocus => true, :class=>'input-xlarge', :placeholder=>'Email address'
+    .input-prepend
+      .add-on
+        i.icon-key
+      = f.password_field :password, :class=>'input-xlarge', :placeholder=>'Password'
+    label.checkbox
+      = f.check_box :remember_me
+      'Remember Me
+    = f.submit "Sign in", :class=>"btn btn-large btn-primary icon-user"
+
+    = render "devise/shared/links"
